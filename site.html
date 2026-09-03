@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alaino — Infrastructure for Frontier Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07112a;
+      --cyan: #00d4ff;
+      --purple: #7b2fff;
+      --green: #00ffb4;
+      --text: #d8eeff;
+      --muted: #4a7a9b;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: linear-gradient(135deg, #07112a 0%, #0d1f4a 50%, #0a1535 100%);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+
+    canvas#bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.025) 2px,
+        rgba(0,0,0,0.025) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Radial vignette */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(7,17,42,0.5) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3.5rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 0 1rem;
+      position: relative;
+    }
+
+    /* ── Logo row ── */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .bracket {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.4rem;
+      color: var(--cyan);
+      opacity: 0.5;
+    }
+
+    .logo-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--cyan);
+      opacity: 0.65;
+      text-transform: uppercase;
+    }
+
+    /* ── Main title ── */
+    h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(2.6rem, 9vw, 6.5rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #fff;
+      position: relative;
+      text-shadow: 0 0 40px rgba(0, 212, 255, 0.15);
+      opacity: 0;
+      animation: fadeUp 1s ease 0.55s forwards;
+    }
+
+    /* Glitch pseudo-elements */
+    h1::before,
+    h1::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+
+    h1.glitch::before {
+      animation: glitch1 0.35s ease forwards;
+      color: var(--cyan);
+      clip-path: polygon(0 15%, 100% 15%, 100% 38%, 0 38%);
+      left: -2px;
+    }
+
+    h1.glitch::after {
+      animation: glitch2 0.35s ease forwards;
+      color: var(--purple);
+      clip-path: polygon(0 58%, 100% 58%, 100% 78%, 0 78%);
+      left: 2px;
+    }
+
+    @keyframes glitch1 {
+      0%   { transform: translateX(0);   opacity: 0; }
+      15%  { transform: translateX(-5px); opacity: 0.9; }
+      35%  { transform: translateX(5px);  opacity: 0.9; }
+      55%  { transform: translateX(-3px); opacity: 0.9; }
+      75%  { transform: translateX(3px);  opacity: 0.9; }
+      100% { transform: translateX(0);   opacity: 0; }
+    }
+
+    @keyframes glitch2 {
+      0%   { transform: translateX(0);   opacity: 0; }
+      15%  { transform: translateX(5px);  opacity: 0.9; }
+      35%  { transform: translateX(-5px); opacity: 0.9; }
+      55%  { transform: translateX(3px);  opacity: 0.9; }
+      75%  { transform: translateX(-3px); opacity: 0.9; }
+      100% { transform: translateX(0);   opacity: 0; }
+    }
+
+    /* ── Hero quote ── */
+    .quote {
+      position: relative;
+      max-width: 780px;
+      margin-top: 2.4rem;
+      padding: 0 0.5rem;
+      font-size: clamp(1rem, 2.1vw, 1.4rem);
+      font-weight: 300;
+      line-height: 1.75;
+      letter-spacing: 0.005em;
+      color: rgba(216, 238, 255, 0.9);
+      opacity: 0;
+      animation: fadeUp 1.1s ease 0.9s forwards;
+    }
+
+    .quote::before,
+    .quote::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.55), transparent);
+    }
+
+    .quote::before { top: -1.5rem; }
+    .quote::after  { bottom: -1.5rem; }
+
+    .quote .lede {
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .hl-ai { color: var(--cyan); }
+    .hl-q  { color: #a78bff; }
+    .hl-bc { color: var(--green); }
+
+    /* ── Sections ── */
+    section.block {
+      padding: 2.6rem 0;
+    }
+
+    section.block#who {
+      padding-top: 2rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-index {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      color: var(--cyan);
+      opacity: 0.7;
+    }
+
+    .section-head h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(1rem, 2.4vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,212,255,0.4), transparent);
+    }
+
+    /* ── Who are we ── */
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 2.6rem;
+      align-items: start;
+    }
+
+    .who-copy p {
+      font-size: 0.98rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(204, 232, 244, 0.78);
+    }
+
+    .who-copy p + p {
+      margin-top: 1.1rem;
+    }
+
+    .who-copy strong {
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .principles {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .principle {
+      border-left: 1px solid rgba(0, 212, 255, 0.28);
+      padding: 0.15rem 0 0.15rem 1rem;
+    }
+
+    .principle h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .principle p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(204, 232, 244, 0.62);
+    }
+
+    /* ── What we do ── */
+    .lead {
+      max-width: 760px;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(204, 232, 244, 0.8);
+    }
+
+    .lead strong {
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .lead + .lead {
+      margin-top: 1.1rem;
+    }
+
+    .do-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+      margin-top: 2.3rem;
+    }
+
+    .do-item {
+      border-top: 1px solid rgba(0, 212, 255, 0.22);
+      padding-top: 0.85rem;
+    }
+
+    .do-item h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.55rem;
+    }
+
+    .do-item p {
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(204, 232, 244, 0.65);
+    }
+
+    .do-item a {
+      color: var(--cyan);
+      text-decoration: none;
+      white-space: nowrap;
+      opacity: 0.85;
+      border-bottom: 1px solid transparent;
+      transition: opacity 0.25s ease, border-color 0.25s ease;
+    }
+
+    .do-item a:hover {
+      opacity: 1;
+      border-bottom-color: currentColor;
+    }
+
+    /* ── Capability cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      --accent: var(--cyan);
+      --accent-dim: rgba(0, 212, 255, 0.3);
+      --accent-wash: rgba(0, 212, 255, 0.05);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 1.4rem 1.3rem 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 3px;
+      background: rgba(9, 22, 54, 0.4);
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent 85%);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-dim);
+      background: var(--accent-wash);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-q {
+      --accent: #a78bff;
+      --accent-dim: rgba(123, 47, 255, 0.32);
+      --accent-wash: rgba(123, 47, 255, 0.05);
+    }
+
+    .card-bc {
+      --accent: var(--green);
+      --accent-dim: rgba(0, 255, 180, 0.26);
+      --accent-wash: rgba(0, 255, 180, 0.05);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .card-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      flex-shrink: 0;
+    }
+
+    .card-head h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .card > p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(204, 232, 244, 0.78);
+    }
+
+    .card-foot {
+      margin-top: auto;
+      padding-top: 1.15rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.53rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.32rem 0.55rem;
+      border: 1px solid var(--accent-dim);
+      border-radius: 2px;
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.25s ease, border-color 0.25s ease,
+                  background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover .chip { opacity: 1; }
+
+    .chip:hover,
+    .chip:focus-visible {
+      opacity: 1;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      box-shadow: 0 0 12px -4px var(--accent);
+      outline: none;
+    }
+
+    /* ── Contact ── */
+    .contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+
+    .contact a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .contact a:hover {
+      color: var(--cyan);
+      text-shadow: 0 0 12px rgba(0,212,255,0.5);
+    }
+
+    /* ── Corner decorations ── */
+    .corner {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.9s forwards;
+      z-index: 3;
+    }
+
+    .corner::before,
+    .corner::after {
+      content: '';
+      position: absolute;
+      background: var(--cyan);
+      opacity: 0.3;
+    }
+
+    .corner::before { width: 100%; height: 1px; top: 0; left: 0; }
+    .corner::after  { width: 1px; height: 100%; top: 0; left: 0; }
+
+    .corner-tl { top: 22px; left: 22px; }
+    .corner-tr { top: 22px; right: 22px; transform: scaleX(-1); }
+    .corner-bl { bottom: 22px; left: 22px; transform: scaleY(-1); }
+    .corner-br { bottom: 22px; right: 22px; transform: scale(-1); }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 2.6rem;
+      padding-top: 1.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    footer .legal {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    footer .rights {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    footer .address {
+      max-width: 440px;
+      letter-spacing: 0.06em;
+      opacity: 0.5;
+    }
+
+    /* ── Status indicator ── */
+    .status {
+      position: fixed;
+      top: 32px;
+      right: 72px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeIn 1s ease 2.1s forwards;
+      z-index: 3;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 860px) {
+      .who-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .cards,
+      .do-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .do-grid { gap: 1.3rem; }
+    }
+
+    @media (max-width: 720px) {
+      .status { display: none; }
+
+      section.block { padding: 2.2rem 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .dot { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── Shared animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- Corner brackets -->
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+
+<main>
+  <section class="hero">
+    <div class="logo-row">
+      <span class="bracket">[</span>
+      <span class="logo-label">ALAINO.XYZ</span>
+      <span class="bracket">]</span>
+    </div>
+
+    <h1 id="title" data-text="ALAINO">ALAINO</h1>
+
+    <blockquote class="quote">
+      <span class="lede">We&rsquo;re at a cusp of civilizational change.</span>
+      <span class="hl-bc">Blockchain</span>, <span class="hl-ai">AI</span> and
+      <span class="hl-q">quantum computing</span> are reshaping how humans live, work
+      and interact &mdash; and every bit of it runs on machines somebody has to keep
+      alive.
+    </blockquote>
+
+  </section>
+
+  <section class="block reveal" id="who">
+    <div class="section-head">
+      <span class="section-index">01</span>
+      <h2>Who are we?</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="who-grid">
+      <div class="who-copy">
+        <p>
+          <strong>We run the machine layer of frontier technology.</strong> Blockchain,
+          artificial intelligence, quantum computing &mdash; the infrastructure underneath
+          all three, in production, around the clock.
+        </p>
+        <p>
+          Frontier technology is only as real as the machines it runs on. Someone has to
+          own the boring, load-bearing parts &mdash; the nodes that settle blocks, the
+          compute that serves models, the servers that queue quantum jobs. That is our
+          half of the work, and everything else we do grows out of it.
+        </p>
+        <p>
+          We&rsquo;re a small, deeply technical team with a long time horizon. No hype cycles,
+          no roadmaps written for investors. Just engineers pushing the frontier a little
+          further out, one system at a time.
+        </p>
+      </div>
+
+      <div class="principles">
+        <div class="principle">
+          <h3>Infrastructure first</h3>
+          <p>Every idea we take seriously earns its keep on live infrastructure, not in a slide deck.</p>
+        </div>
+        <div class="principle">
+          <h3>Long time horizons</h3>
+          <p>We optimize for the decade, not the quarter. Compounding beats chasing.</p>
+        </div>
+        <div class="principle">
+          <h3>Open &amp; verifiable</h3>
+          <p>Systems that shape civilization should be auditable by the people living in it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reveal" id="do">
+    <div class="section-head">
+      <span class="section-index">02</span>
+      <h2>What we do?</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <p class="lead">
+      The machines that run these technologies &mdash; the nodes, the compute, the qubits &mdash;
+      are the <strong>substrate the next century will be built on</strong>.
+      We build, operate and study that substrate.
+    </p>
+
+    <p class="lead">
+      Running it is what earns us the right to an opinion about it. Our research and
+      advisory work comes out of systems we keep alive ourselves &mdash; which is what
+      lets us tell teams, funds and institutions what is real and what is merely loud.
+    </p>
+
+    <div class="do-grid">
+      <div class="do-item">
+        <h3>Infrastructure</h3>
+        <p>
+          Production nodes, compute and quantum workloads across all three domains,
+          run around the clock. <a href="#what">See what we run &rarr;</a>
+        </p>
+      </div>
+      <div class="do-item">
+        <h3>Research &amp; development</h3>
+        <p>
+          Deep technical work on distributed consensus, AI systems and quantum
+          algorithms &mdash; prototyped on hardware we operate ourselves.
+        </p>
+      </div>
+      <div class="do-item">
+        <h3>Advisory</h3>
+        <p>
+          Technical due diligence, architecture reviews and strategy for organizations
+          placing bets on frontier technology.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reveal" id="what">
+    <div class="section-head">
+      <span class="section-index">03</span>
+      <h2>What we run</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="cards">
+      <article class="card card-bc">
+        <div class="card-head">
+          <span class="card-dot"></span>
+          <h3>Blockchain</h3>
+        </div>
+        <p>We run blockchain nodes, helping secure and settle public networks.</p>
+        <div class="card-foot">
+          <a class="chip" href="https://bitcoin.org" target="_blank" rel="noopener noreferrer">Bitcoin</a>
+          <a class="chip" href="https://ethereum.org" target="_blank" rel="noopener noreferrer">Ethereum</a>
+          <a class="chip" href="https://www.canton.network" target="_blank" rel="noopener noreferrer">Canton</a>
+        </div>
+      </article>
+
+      <article class="card card-ai">
+        <div class="card-head">
+          <span class="card-dot"></span>
+          <h3>Artificial Intelligence</h3>
+        </div>
+        <p>We run AI compute nodes, serving inference for open model networks.</p>
+        <div class="card-foot">
+          <a class="chip" href="https://venice.ai" target="_blank" rel="noopener noreferrer">Venice AI</a>
+          <a class="chip" href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+          <a class="chip" href="https://www.together.ai" target="_blank" rel="noopener noreferrer">Together AI</a>
+        </div>
+      </article>
+
+      <article class="card card-q">
+        <div class="card-head">
+          <span class="card-dot"></span>
+          <h3>Quantum Computing</h3>
+        </div>
+        <p>We run QC workload servers, queuing jobs against real quantum hardware.</p>
+        <div class="card-foot">
+          <a class="chip" href="https://www.ibm.com/quantum" target="_blank" rel="noopener noreferrer">IBM Cloud</a>
+          <a class="chip" href="https://www.dwavequantum.com" target="_blank" rel="noopener noreferrer">D-Wave</a>
+          <a class="chip" href="https://quip.network" target="_blank" rel="noopener noreferrer">Quip Network</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <div class="contact">
+      <a href="mailto:abhi@alaino.xyz">abhi@alaino.xyz</a>
+    </div>
+
+    <div class="legal">
+      <p class="rights">&copy; 2026 Catalysis International Ltd. All rights reserved.</p>
+      <p class="address">
+        Registered office: Intershore Chambers, P.O. Box 4342, Road Town,
+        Tortola, British Virgin Islands - VG1110
+      </p>
+    </div>
+  </footer>
+</main>
+
+<div class="status">
+  <div class="dot"></div>
+  System Online
+</div>
+
+<script>
+// ────────────────────────────────────────────────────────────────
+//  Particle / network background
+// ────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('bg');
+const ctx    = canvas.getContext('2d');
+
+let W, H, particles;
+
+const COUNT    = 90;
+const MAX_DIST = 140;
+const COLORS   = ['#00d4ff', '#7b2fff', '#00ffb4'];
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+class Particle {
+  constructor() { this.reset(true); }
+
+  reset(initial = false) {
+    this.x     = Math.random() * W;
+    this.y     = initial ? Math.random() * H : (Math.random() < 0.5 ? -5 : H + 5);
+    this.vx    = (Math.random() - 0.5) * 0.45;
+    this.vy    = (Math.random() - 0.5) * 0.45;
+    this.r     = Math.random() * 1.4 + 0.4;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.alpha = Math.random() * 0.5 + 0.4;
+  }
+
+  update() {
+    // subtle mouse repel
+    const dx = this.x - mouse.x;
+    const dy = this.y - mouse.y;
+    const d  = Math.sqrt(dx * dx + dy * dy);
+    if (d < 110 && d > 0) {
+      const f = (110 - d) / 110 * 0.7;
+      this.x += (dx / d) * f;
+      this.y += (dy / d) * f;
+    }
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.x < -10 || this.x > W + 10) this.vx *= -1;
+    if (this.y < -10 || this.y > H + 10) this.vy *= -1;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.alpha;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function init() {
+  resize();
+  particles = Array.from({ length: COUNT }, () => new Particle());
+}
+
+function drawLines() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const a  = particles[i], b = particles[j];
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const d  = Math.sqrt(dx * dx + dy * dy);
+      if (d < MAX_DIST) {
+        const alpha = (1 - d / MAX_DIST) * 0.22;
+        const grad  = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+        grad.addColorStop(0, a.color);
+        grad.addColorStop(1, b.color);
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = grad;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth   = 0.55;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+    }
+  }
+}
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawLines();
+  requestAnimationFrame(loop);
+}
+
+window.addEventListener('resize', () => {
+  resize();
+  particles.forEach(p => {
+    if (p.x > W) p.x = W - 10;
+    if (p.y > H) p.y = H - 10;
+  });
+});
+
+// ────────────────────────────────────────────────────────────────
+//  Mouse tracking
+// ────────────────────────────────────────────────────────────────
+const mouse = { x: -999, y: -999 };
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+// ────────────────────────────────────────────────────────────────
+//  Periodic glitch on title
+// ────────────────────────────────────────────────────────────────
+const title = document.getElementById('title');
+
+function triggerGlitch() {
+  title.classList.add('glitch');
+  setTimeout(() => title.classList.remove('glitch'), 350);
+  setTimeout(triggerGlitch, 3500 + Math.random() * 5000);
+}
+
+setTimeout(triggerGlitch, 2800);
+
+// ────────────────────────────────────────────────────────────────
+//  Scroll reveal
+// ────────────────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ────────────────────────────────────────────────────────────────
+//  Boot
+// ────────────────────────────────────────────────────────────────
+init();
+loop();
+</script>
+</body>
+</html>
