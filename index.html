@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alaino — Institutional Validator Infrastructure</title>
-  <meta name="description" content="Alaino operates validators on Ethereum and the Canton Network for institutions. Multi-cloud across AWS, Google Cloud and Azure, geographically distributed, engineered for uptime.">
+  <meta name="description" content="Alaino operates validators on Ethereum and the Canton Network for institutions. Multi-cloud across AWS, Google Cloud, Azure, CoreWeave and Oracle Cloud, geographically distributed, engineered for uptime.">
   <meta property="og:title" content="Alaino — Institutional Validator Infrastructure">
   <meta property="og:description" content="Validators on Ethereum and Canton. Multi-cloud, geographically distributed, engineered for uptime.">
   <meta property="og:type" content="website">
@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="preload" href="fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -48,9 +48,9 @@
   <section class="hero">
     <div class="hero-bars" id="hero-bars" aria-hidden="true"></div>
     <div class="hero-inner">
-      <p class="eyebrow">Institutional node operator</p>
-      <h1>Validator infrastructure<br><strong>for institutions.</strong></h1>
-      <p class="hero-sub">Alaino operates validators on Ethereum and the Canton Network. Multi-cloud, geographically distributed, engineered for uptime.</p>
+      <p class="eyebrow">Ethereum · Canton Network</p>
+      <h1><span class="nowrap">Institutional-grade</span><br><strong>Validator Infrastructure</strong></h1>
+      <p class="hero-sub">Alaino operates validators on Ethereum and Tier-1 blockchains. Multi-cloud, geographically distributed, engineered for uptime.</p>
       <div class="hero-cta">
         <a class="btn" href="#contact">Get in touch</a>
         <a class="link-arrow" href="#networks">See our networks</a>
@@ -62,11 +62,20 @@
   <section class="clouds" aria-label="Cloud providers">
     <div class="wrap clouds-inner">
       <p class="clouds-label">Deployed across</p>
-      <ul class="cloud-logos">
-        <li><img src="assets/aws.svg" alt="Amazon Web Services" height="34"></li>
-        <li><img src="assets/google-cloud.svg" alt="Google Cloud" height="30"></li>
-        <li><img src="assets/azure.svg" alt="Microsoft Azure" height="30"></li>
-      </ul>
+      <div class="marquee" aria-hidden="false">
+        <ul class="marquee-track">
+          <li><img src="assets/aws.svg" alt="Amazon Web Services" class="l-aws"></li>
+          <li><img src="assets/google-cloud.svg" alt="Google Cloud" class="l-gcp"></li>
+          <li><img src="assets/azure.svg" alt="Microsoft Azure" class="l-azure"></li>
+          <li><img src="assets/coreweave.svg" alt="CoreWeave" class="l-cw"></li>
+          <li class="l-oci"><img src="assets/oracle.svg" alt="Oracle"><span>Cloud Infrastructure</span></li>
+          <li aria-hidden="true"><img src="assets/aws.svg" alt="" class="l-aws"></li>
+          <li aria-hidden="true"><img src="assets/google-cloud.svg" alt="" class="l-gcp"></li>
+          <li aria-hidden="true"><img src="assets/azure.svg" alt="" class="l-azure"></li>
+          <li aria-hidden="true"><img src="assets/coreweave.svg" alt="" class="l-cw"></li>
+          <li aria-hidden="true" class="l-oci"><img src="assets/oracle.svg" alt=""><span>Cloud Infrastructure</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -78,14 +87,6 @@
         <h2>Networks we operate.</h2>
       </div>
       <div class="net-grid">
-        <article class="net">
-          <div class="net-logo"><img src="assets/canton-mark.svg" alt="" height="36"><span>Canton Network</span></div>
-          <div class="net-body">
-            <h3>Canton Network</h3>
-            <p>MainNet validator, live since October 2026.</p>
-          </div>
-          <span class="pill">Live</span>
-        </article>
         <article class="net">
           <div class="net-logo"><img src="assets/ethereum.svg" alt="" height="34"><span>Ethereum</span></div>
           <div class="net-body">
@@ -110,6 +111,14 @@
           </div>
           <span class="pill">Live</span>
         </article>
+        <article class="net">
+          <div class="net-logo"><img src="assets/canton-mark.svg" alt="" height="36"><span>Canton Network</span></div>
+          <div class="net-body">
+            <h3>Canton Network</h3>
+            <p>MainNet validator, live since October 2026.</p>
+          </div>
+          <span class="pill">Live</span>
+        </article>
       </div>
     </div>
   </section>
@@ -123,7 +132,7 @@
       </div>
 
       <div class="stats">
-        <div class="stat"><strong>3</strong><span>Cloud providers</span></div>
+        <div class="stat"><strong>5</strong><span>Cloud providers</span></div>
         <div class="stat"><strong>3</strong><span>Continents</span></div>
         <div class="stat"><strong>24/7</strong><span>Engineering on-call</span></div>
         <div class="stat"><strong>0</strong><span>Slashing events</span></div>
@@ -132,7 +141,7 @@
       <div class="tiles">
         <article class="tile tile-blue">
           <h3>Multi-cloud</h3>
-          <p>AWS, Google Cloud and Azure. Separate accounts, credentials and quotas per node.</p>
+          <p>AWS, Google Cloud, Azure, CoreWeave and Oracle Cloud. Separate accounts, credentials and quotas per node.</p>
           <div class="stripes" aria-hidden="true"></div>
         </article>
         <article class="tile tile-yellow">
@@ -190,7 +199,7 @@
         </details>
         <details>
           <summary>Where does your infrastructure run?</summary>
-          <p>Across AWS, Google Cloud and Microsoft Azure in North America, Europe and Asia-Pacific, in separate accounts and regions.</p>
+          <p>Across AWS, Google Cloud, Microsoft Azure, CoreWeave and Oracle Cloud in North America, Europe and Asia-Pacific, in separate accounts and regions.</p>
         </details>
         <details>
           <summary>What is a distributed validator?</summary>
