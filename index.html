@@ -4,488 +4,241 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alaino — Institutional Validator Infrastructure</title>
-  <meta name="description" content="Alaino operates institutional-grade validator infrastructure across Ethereum and the Canton Network. Multi-cloud across AWS, Google Cloud and Azure, geographically distributed, with distributed validator technology and 24/7 operations.">
+  <meta name="description" content="Alaino operates validators on Ethereum and the Canton Network for institutions. Multi-cloud across AWS, Google Cloud and Azure, geographically distributed, engineered for uptime.">
   <meta property="og:title" content="Alaino — Institutional Validator Infrastructure">
-  <meta property="og:description" content="Multi-cloud, geographically distributed validator operations on Ethereum and Canton. Built for institutions.">
+  <meta property="og:description" content="Validators on Ethereum and Canton. Multi-cloud, geographically distributed, engineered for uptime.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://alaino.xyz/">
-  <meta name="theme-color" content="#0a0e17">
+  <meta name="theme-color" content="#CFEBFF">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=1">
+  <link rel="preload" href="fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 
-<header class="nav" id="top">
-  <div class="wrap nav-inner">
+<header class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
     <a class="brand" href="#top" aria-label="Alaino home">
-      <img class="brand-mark" src="logo.svg" alt="" width="28" height="28">
-      <span class="brand-name">ALAINO</span>
+      <svg class="brand-mark" viewBox="454 474 292 253" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M454.766 474.63H503.177C503.177 474.63 503.581 590.817 619.365 590.817C522.543 590.817 522.542 474.63 522.542 474.63H570.954C570.954 474.63 561.271 581.135 638.73 581.135C579.906 581.135 590.318 474.63 590.318 474.63L638.73 474.63C638.73 474.63 600.001 590.817 696.824 590.818H745.236V610.182H696.824C600.001 610.182 638.73 726.37 638.73 726.37H590.318C590.318 726.37 579.905 619.865 638.73 619.864C561.271 619.865 570.955 726.37 570.955 726.37H522.543C522.543 726.37 522.542 610.182 619.365 610.182C503.581 610.182 503.178 726.37 503.178 726.37H454.766C454.766 726.37 454.766 600.5 590.318 600.5C454.766 600.5 454.766 474.63 454.766 474.63Z" fill="currentColor"/></svg>
+      <span class="brand-name">alaino</span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <div class="nav-links">
       <a href="#networks">Networks</a>
       <a href="#infrastructure">Infrastructure</a>
       <a href="#operations">Operations</a>
-      <a href="#canton">Canton</a>
-    </nav>
-    <a class="btn btn-sm" href="#contact">Contact</a>
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span>
-    </button>
-  </div>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-nav" href="#contact">Get in touch</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </nav>
   <div class="mobile-menu" id="mobile-menu">
     <a href="#networks">Networks</a>
     <a href="#infrastructure">Infrastructure</a>
     <a href="#operations">Operations</a>
-    <a href="#canton">Canton</a>
-    <a href="#contact">Contact</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Get in touch</a>
   </div>
 </header>
 
-<main>
+<main id="top">
 
-  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-grid" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="live-dot"></span>Institutional node operator</p>
-        <h1>Validator infrastructure<br>built to institutional standards.</h1>
-        <p class="lede">
-          Alaino operates validators and full nodes for Ethereum and the Canton Network.
-          Multi-cloud across AWS, Google Cloud and Azure. Geographically distributed.
-          Distributed validator technology at the signing layer. Engineers on call around the clock.
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#canton">Canton validator program</a>
-          <a class="btn btn-ghost" href="#infrastructure">How we run infrastructure</a>
-        </div>
-        <ul class="hero-proof" aria-label="Key facts">
-          <li><strong>3</strong><span>cloud providers</span></li>
-          <li><strong>3</strong><span>continents</span></li>
-          <li><strong>24/7</strong><span>engineer on-call</span></li>
-          <li><strong>0</strong><span>slashing events</span></li>
-        </ul>
+    <div class="hero-bars" id="hero-bars" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Institutional node operator</p>
+      <h1>Validator infrastructure<br><strong>for institutions.</strong></h1>
+      <p class="hero-sub">Alaino operates validators on Ethereum and the Canton Network. Multi-cloud, geographically distributed, engineered for uptime.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="link-arrow" href="#networks">See our networks</a>
       </div>
-
-      <aside class="console" aria-label="Fleet status">
-        <div class="console-head">
-          <span class="console-title">FLEET STATUS</span>
-          <span class="console-time" id="console-time">—</span>
-        </div>
-        <ul class="console-rows">
-          <li>
-            <span class="c-net"><i class="c-ico c-canton"></i>Canton MainNet</span>
-            <span class="c-role">Validator</span>
-            <span class="c-state ok">ACTIVE</span>
-          </li>
-          <li>
-            <span class="c-net"><i class="c-ico c-canton"></i>Canton TestNet</span>
-            <span class="c-role">Validator</span>
-            <span class="c-state ok">ACTIVE</span>
-          </li>
-          <li>
-            <span class="c-net"><i class="c-ico c-eth"></i>Ethereum Mainnet</span>
-            <span class="c-role">Validators · DVT</span>
-            <span class="c-state ok">ACTIVE</span>
-          </li>
-          <li>
-            <span class="c-net"><i class="c-ico c-eth"></i>Ethereum Mainnet</span>
-            <span class="c-role">Execution + Consensus</span>
-            <span class="c-state ok">SYNCED</span>
-          </li>
-          <li>
-            <span class="c-net"><i class="c-ico c-btc"></i>Bitcoin</span>
-            <span class="c-role">Full node</span>
-            <span class="c-state ok">SYNCED</span>
-          </li>
-          <li>
-            <span class="c-net"><i class="c-ico c-sol"></i>Solana</span>
-            <span class="c-role">RPC node</span>
-            <span class="c-state ok">SYNCED</span>
-          </li>
-        </ul>
-        <div class="console-foot">
-          <div><span class="k">Clouds</span><span class="v">AWS · GCP · Azure</span></div>
-          <div><span class="k">Regions</span><span class="v">NA · EU · APAC</span></div>
-          <div><span class="k">Backups</span><span class="v">Every 4h · off-site</span></div>
-          <div><span class="k">Monitoring</span><span class="v">Prometheus · PagerDuty</span></div>
-        </div>
-      </aside>
     </div>
   </section>
 
-  <!-- ───────────────────────── TRUST STRIP ───────────────────────── -->
-  <section class="strip">
-    <div class="wrap strip-inner">
-      <span class="strip-label">Infrastructure on</span>
-      <ul class="strip-logos" aria-label="Cloud providers">
-        <li>Amazon Web Services</li>
-        <li>Google Cloud</li>
-        <li>Microsoft Azure</li>
-      </ul>
-      <span class="strip-label">Networks</span>
-      <ul class="strip-logos" aria-label="Networks">
-        <li>Canton Network</li>
-        <li>Ethereum</li>
-        <li>Bitcoin</li>
-        <li>Solana</li>
+  <!-- CLOUDS -->
+  <section class="clouds" aria-label="Cloud providers">
+    <div class="wrap clouds-inner">
+      <p class="clouds-label">Deployed across</p>
+      <ul class="cloud-logos">
+        <li><img src="assets/aws.svg" alt="Amazon Web Services" height="34"></li>
+        <li><img src="assets/google-cloud.svg" alt="Google Cloud" height="30"></li>
+        <li><img src="assets/azure.svg" alt="Microsoft Azure" height="30"></li>
       </ul>
     </div>
   </section>
 
-  <!-- ───────────────────────── NETWORKS ───────────────────────── -->
+  <!-- NETWORKS -->
   <section class="section" id="networks">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">01 — Networks</p>
-        <h2>Production validators and nodes, operated end to end.</h2>
-        <p class="sub">We run the infrastructure ourselves. No white-label resellers, no shared keys, no shortcuts between the hardware and the chain.</p>
+        <p class="eyebrow">Networks</p>
+        <h2>Networks we operate.</h2>
       </div>
-
       <div class="net-grid">
-        <article class="net-card net-featured">
-          <div class="net-top">
-            <span class="net-badge">Canton Network</span>
-            <span class="pill pill-live">MainNet · Active</span>
+        <article class="net">
+          <div class="net-logo"><img src="assets/canton-mark.svg" alt="" height="36"><span>Canton Network</span></div>
+          <div class="net-body">
+            <h3>Canton Network</h3>
+            <p>MainNet validator, live since October 2026.</p>
           </div>
-          <h3>Canton validator</h3>
-          <p>
-            Active validator on Canton MainNet since October 2026, allowlisted by all
-            Super Validators. We operate the full validator stack: participant node,
-            validator app, wallet and scan integration, with automated encrypted backups,
-            frozen migration state and rehearsed restores.
-          </p>
-          <ul class="net-facts">
-            <li>MainNet and TestNet validators</li>
-            <li>Allowlisted across every Super Validator</li>
-            <li>Encrypted off-site backups every 4 hours</li>
-            <li>Proposed 16-validator institutional fleet</li>
-          </ul>
-          <a class="link" href="#canton">Canton fleet plan →</a>
+          <span class="pill">Live</span>
         </article>
-
-        <article class="net-card">
-          <div class="net-top">
-            <span class="net-badge">Ethereum</span>
-            <span class="pill pill-live">Mainnet · Active</span>
+        <article class="net">
+          <div class="net-logo"><img src="assets/ethereum.svg" alt="" height="34"><span>Ethereum</span></div>
+          <div class="net-body">
+            <h3>Ethereum</h3>
+            <p>Validators run as distributed validator clusters.</p>
           </div>
-          <h3>Ethereum validators</h3>
-          <p>
-            Our longest-running line of business. Validators operated through the Merge,
-            Shapella, Dencun and Pectra, running execution and consensus clients we
-            select for client diversity, with distributed validator clusters at the
-            signing layer.
-          </p>
-          <ul class="net-facts">
-            <li>Distributed validator (DVT) clusters</li>
-            <li>Minority client mix</li>
-            <li>Remote signer and slashing protection</li>
-          </ul>
+          <span class="pill">Live</span>
         </article>
-
-        <article class="net-card">
-          <div class="net-top">
-            <span class="net-badge">Full nodes</span>
-            <span class="pill">Mainnet</span>
+        <article class="net">
+          <div class="net-logo"><img src="assets/bitcoin.svg" alt="" height="32"><span>Bitcoin</span></div>
+          <div class="net-body">
+            <h3>Bitcoin</h3>
+            <p>Self-hosted full nodes.</p>
           </div>
-          <h3>Bitcoin, Solana, Polygon</h3>
-          <p>
-            Archive and RPC nodes kept in sync for our own validator operations,
-            indexing and partner access. Same monitoring, same on-call rotation,
-            same backup discipline as our validators.
-          </p>
-          <ul class="net-facts">
-            <li>Bitcoin full nodes</li>
-            <li>Solana RPC</li>
-            <li>Polygon PoS</li>
-          </ul>
+          <span class="pill">Live</span>
+        </article>
+        <article class="net">
+          <div class="net-logo"><img src="assets/solana.svg" alt="" height="26"><span>Solana</span></div>
+          <div class="net-body">
+            <h3>Solana</h3>
+            <p>Dedicated RPC infrastructure.</p>
+          </div>
+          <span class="pill">Live</span>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────── INFRASTRUCTURE ───────────────────────── -->
-  <section class="section section-alt" id="infrastructure">
+  <!-- INFRASTRUCTURE -->
+  <section class="section section-blue" id="infrastructure">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">02 — Infrastructure</p>
-        <h2>Resilience by design, not by luck.</h2>
-        <p class="sub">A validator that depends on one cloud, one region or one machine is a single point of failure. We remove every one of them we can.</p>
+        <p class="eyebrow">Infrastructure</p>
+        <h2>Built for resilience.</h2>
       </div>
 
-      <div class="pillars">
-        <article class="pillar">
-          <div class="pillar-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 8.5a4 4 0 0 1 0 8H7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
+      <div class="stats">
+        <div class="stat"><strong>3</strong><span>Cloud providers</span></div>
+        <div class="stat"><strong>3</strong><span>Continents</span></div>
+        <div class="stat"><strong>24/7</strong><span>Engineering on-call</span></div>
+        <div class="stat"><strong>0</strong><span>Slashing events</span></div>
+      </div>
+
+      <div class="tiles">
+        <article class="tile tile-blue">
           <h3>Multi-cloud</h3>
-          <p>
-            Fleets are deployed across <strong>AWS, Google Cloud and Microsoft Azure</strong>
-            in separate accounts with separate credentials, quotas and billing. A provider-wide
-            incident degrades a fraction of the fleet, never all of it.
-          </p>
-          <ul class="tags"><li>AWS</li><li>Google Cloud</li><li>Azure</li></ul>
+          <p>AWS, Google Cloud and Azure. Separate accounts, credentials and quotas per node.</p>
+          <div class="stripes" aria-hidden="true"></div>
         </article>
-
-        <article class="pillar">
-          <div class="pillar-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-          </div>
+        <article class="tile tile-yellow">
           <h3>Geographic diversity</h3>
-          <p>
-            Nodes run across <strong>North America, Europe and Asia-Pacific</strong>, in
-            independent regions and availability zones. Regional outages, network partitions
-            and local power events stay local.
-          </p>
-          <ul class="tags"><li>N. Virginia</li><li>Frankfurt</li><li>London</li><li>Singapore</li><li>Tokyo</li></ul>
+          <p>North America, Europe and Asia-Pacific. Independent regions and availability zones.</p>
+          <div class="stripes" aria-hidden="true"></div>
         </article>
-
-        <article class="pillar">
-          <div class="pillar-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 7l-5 9M13 7l5 9M7.2 18h9.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-          </div>
+        <article class="tile tile-purple">
           <h3>Distributed validators</h3>
-          <p>
-            On Ethereum we run validators as <strong>distributed validator clusters</strong>:
-            the key is split across independent nodes and signing requires a threshold.
-            No single machine holds a full key, and the loss of a node costs nothing.
-          </p>
-          <ul class="tags"><li>Threshold signing</li><li>No single key</li><li>Fault tolerant</li></ul>
+          <p>Keys split across machines and clouds. Threshold signing, no single point of failure.</p>
+          <div class="stripes" aria-hidden="true"></div>
         </article>
-
-        <article class="pillar">
-          <div class="pillar-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-          </div>
+        <article class="tile tile-green">
           <h3>Key management</h3>
-          <p>
-            Validator keys are generated offline, held in remote signers with slashing
-            protection, and never stored on the host that talks to the network. Access is
-            hardware-backed, least-privilege and logged.
-          </p>
-          <ul class="tags"><li>Remote signer</li><li>Slashing protection</li><li>Hardware-backed access</li></ul>
+          <p>Keys generated offline and held in remote signers with slashing protection.</p>
+          <div class="stripes" aria-hidden="true"></div>
         </article>
-      </div>
-
-      <!-- DVT diagram -->
-      <div class="diagram">
-        <div class="diagram-copy">
-          <p class="eyebrow">Distributed validator cluster</p>
-          <h3>One validator. Four machines. Three clouds.</h3>
-          <p>
-            A distributed validator cluster spreads one validator across independent operators,
-            clouds and regions. Any threshold of nodes can sign; any minority can fail.
-            The validator keeps attesting through a cloud outage, a hardware failure or a
-            maintenance window.
-          </p>
-        </div>
-        <svg class="dvt" viewBox="0 0 520 300" role="img" aria-label="Diagram of a distributed validator cluster across three clouds">
-          <g class="dvt-nodes" font-family="IBM Plex Mono, monospace" font-size="11">
-            <g transform="translate(30,16)">
-              <rect width="210" height="54" rx="6"/>
-              <text x="14" y="23" class="t">node-1</text><text x="14" y="41" class="m">AWS · us-east-1</text>
-            </g>
-            <g transform="translate(30,86)">
-              <rect width="210" height="54" rx="6"/>
-              <text x="14" y="23" class="t">node-2</text><text x="14" y="41" class="m">GCP · europe-west2</text>
-            </g>
-            <g transform="translate(30,156)">
-              <rect width="210" height="54" rx="6"/>
-              <text x="14" y="23" class="t">node-3</text><text x="14" y="41" class="m">Azure · eastus2</text>
-            </g>
-            <g transform="translate(30,226)" class="down">
-              <rect width="210" height="54" rx="6"/>
-              <text x="14" y="23" class="t">node-4</text><text x="14" y="41" class="m">GCP · asia-southeast1</text>
-              <text x="198" y="23" text-anchor="end" class="warn" font-size="9" letter-spacing="1">OFFLINE · TOLERATED</text>
-            </g>
-          </g>
-          <g class="dvt-lines" fill="none" stroke-width="1.4">
-            <path d="M240 43 C 300 43, 310 150, 378 150"/>
-            <path d="M240 113 C 300 113, 310 150, 378 150"/>
-            <path d="M240 183 C 300 183, 310 150, 378 150"/>
-          </g>
-          <path class="dvt-dead" d="M240 253 C 300 253, 310 150, 378 150" fill="none" stroke-width="1.2"/>
-          <g transform="translate(378,110)">
-            <rect width="120" height="80" rx="8" class="agg"/>
-            <text x="60" y="32" text-anchor="middle" class="t" font-family="IBM Plex Mono, monospace" font-size="13">3-of-4</text>
-            <text x="60" y="50" text-anchor="middle" class="m" font-family="IBM Plex Mono, monospace" font-size="10">threshold</text>
-            <text x="60" y="66" text-anchor="middle" class="m" font-family="IBM Plex Mono, monospace" font-size="10">signature</text>
-          </g>
-          <text x="438" y="220" text-anchor="middle" class="m" font-family="IBM Plex Mono, monospace" font-size="10">→ attestation on-chain</text>
-        </svg>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────── OPERATIONS ───────────────────────── -->
+  <!-- OPERATIONS -->
   <section class="section" id="operations">
-    <div class="wrap">
+    <div class="wrap ops-wrap">
       <div class="section-head">
-        <p class="eyebrow">03 — Operations</p>
-        <h2>Run like production, because it is.</h2>
-        <p class="sub">The chain does not care about intentions. It cares whether the node signed on time. Everything below exists to make that boring.</p>
+        <p class="eyebrow">Operations</p>
+        <h2>Operated like production.</h2>
       </div>
-
-      <div class="ops-grid">
-        <article class="ops">
-          <span class="ops-n">01</span>
-          <h3>24/7 monitoring and on-call</h3>
-          <p>Prometheus and Grafana on every host. Alerts page a human engineer, day or night, with escalation if unacknowledged.</p>
-        </article>
-        <article class="ops">
-          <span class="ops-n">02</span>
-          <h3>Backups and rehearsed restores</h3>
-          <p>Encrypted snapshots to off-site object storage on a fixed schedule. Restores are rehearsed, timed and documented, not assumed.</p>
-        </article>
-        <article class="ops">
-          <span class="ops-n">03</span>
-          <h3>Staged upgrades</h3>
-          <p>Every client release goes to TestNet first, then rolls through MainNet nodes one at a time. Rollback paths are prepared before anything ships.</p>
-        </article>
-        <article class="ops">
-          <span class="ops-n">04</span>
-          <h3>Hardened hosts</h3>
-          <p>One security group per host, no public inbound, admin access from fixed addresses only, instance metadata locked down, termination protection on.</p>
-        </article>
-        <article class="ops">
-          <span class="ops-n">05</span>
-          <h3>Runbooks and change control</h3>
-          <p>Deploy, join, upgrade, restore and incident procedures are written down, versioned and followed. Every production change leaves a record.</p>
-        </article>
-        <article class="ops">
-          <span class="ops-n">06</span>
-          <h3>Isolated failure domains</h3>
-          <p>Separate cloud accounts, quotas, credentials and backup prefixes per node. One node's incident cannot become another node's incident.</p>
-        </article>
-      </div>
+      <ul class="ops">
+        <li><h3>24/7 monitoring and on-call</h3><p>Every host instrumented. Alerts page an engineer.</p></li>
+        <li><h3>Encrypted off-site backups</h3><p>Every four hours. Restores rehearsed, not assumed.</p></li>
+        <li><h3>Staged upgrades</h3><p>TestNet first, then rolling through MainNet.</p></li>
+        <li><h3>Hardened hosts</h3><p>No public inbound. Per-host firewalls. Locked-down access.</p></li>
+        <li><h3>Runbooks and change control</h3><p>Every procedure written down and versioned.</p></li>
+        <li><h3>Isolated failure domains</h3><p>One node's incident never becomes another's.</p></li>
+      </ul>
     </div>
   </section>
 
-  <!-- ───────────────────────── CANTON ───────────────────────── -->
-  <section class="section section-canton" id="canton">
-    <div class="wrap">
+  <!-- FAQ -->
+  <section class="section section-purple" id="faq">
+    <div class="wrap faq-wrap">
       <div class="section-head">
-        <p class="eyebrow">04 — Canton Network</p>
-        <h2>An institutional validator fleet for Canton.</h2>
-        <p class="sub">
-          We are an active Canton MainNet validator today. We are proposing to operate an
-          initial fleet of sixteen validators, distributed across three clouds and three
-          continents, run to the standard described on this page.
-        </p>
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions, answered.</h2>
       </div>
-
-      <div class="canton-grid">
-        <div class="canton-stats">
-          <div class="stat"><strong>16</strong><span>validators in the initial fleet</span></div>
-          <div class="stat"><strong>3</strong><span>cloud providers, separate accounts</span></div>
-          <div class="stat"><strong>6</strong><span>regions across NA, EU and APAC</span></div>
-          <div class="stat"><strong>1</strong><span>MainNet validator live since Oct 2026</span></div>
-        </div>
-
-        <div class="fleet" id="fleet" aria-label="Proposed fleet topology">
-          <div class="fleet-head">
-            <span>Proposed fleet topology</span>
-            <span class="fleet-legend">
-              <i class="sw sw-aws"></i>AWS
-              <i class="sw sw-gcp"></i>Google Cloud
-              <i class="sw sw-az"></i>Azure
-            </span>
-          </div>
-          <div class="fleet-grid" id="fleet-grid"></div>
-        </div>
-      </div>
-
-      <div class="canton-cols">
-        <div class="ccol">
-          <h3>What we run today</h3>
-          <ul class="checks">
-            <li>Canton MainNet validator, active since 1 October 2026</li>
-            <li>Allowlisted by all Super Validators</li>
-            <li>TestNet validator for staged upgrades</li>
-            <li>Encrypted backups every 4 hours to off-site object storage</li>
-            <li>Documented join, upgrade and restore runbooks</li>
-          </ul>
-        </div>
-        <div class="ccol">
-          <h3>What the fleet adds</h3>
-          <ul class="checks">
-            <li>16 validators across AWS, Google Cloud and Azure</li>
-            <li>Six regions on three continents</li>
-            <li>Independent accounts, credentials and backup stores per validator</li>
-            <li>Rolling upgrades with no fleet-wide downtime</li>
-            <li>Per-validator uptime and health reporting for the Foundation</li>
-          </ul>
-        </div>
-        <div class="ccol">
-          <h3>Why Alaino</h3>
-          <ul class="checks">
-            <li>Operator-run: the engineers who built the stack run it</li>
-            <li>Years of Ethereum validator operations across every major upgrade</li>
-            <li>Distributed validator expertise at the protocol level</li>
-            <li>Long time horizon: we build for the decade, not the quarter</li>
-          </ul>
-        </div>
+      <div class="faq">
+        <details open>
+          <summary>What does Alaino do?</summary>
+          <p>We operate blockchain validators and nodes for institutions. We run the infrastructure ourselves, end to end.</p>
+        </details>
+        <details>
+          <summary>Which networks do you support?</summary>
+          <p>Canton Network and Ethereum validators today, plus Bitcoin and Solana nodes. New networks on request.</p>
+        </details>
+        <details>
+          <summary>Where does your infrastructure run?</summary>
+          <p>Across AWS, Google Cloud and Microsoft Azure in North America, Europe and Asia-Pacific, in separate accounts and regions.</p>
+        </details>
+        <details>
+          <summary>What is a distributed validator?</summary>
+          <p>A validator whose key is split across several machines. A threshold of them signs together, so no single machine holds a full key or can take the validator down.</p>
+        </details>
+        <details>
+          <summary>How do you handle keys?</summary>
+          <p>Generated offline, stored in remote signers with slashing protection, never on the host that talks to the network. Access is hardware-backed and least-privilege.</p>
+        </details>
+        <details>
+          <summary>Are you running on Canton today?</summary>
+          <p>Yes. Alaino is an active MainNet validator, allowlisted by all Super Validators, with a TestNet validator for staged upgrades.</p>
+        </details>
+        <details>
+          <summary>How do we work with you?</summary>
+          <p>Email us. We scope the validators, regions and reporting you need and get them running.</p>
+        </details>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────── PRINCIPLES ───────────────────────── -->
-  <section class="section section-alt" id="about">
-    <div class="wrap about">
-      <div class="section-head compact">
-        <p class="eyebrow">05 — Company</p>
-        <h2>A small, deeply technical team with a long time horizon.</h2>
-      </div>
-      <div class="about-grid">
-        <p>
-          Alaino is a node operator. We started running Ethereum validators because we
-          believed the networks that matter should be secured by people who understand
-          them at the protocol level. We have been operating production blockchain
-          infrastructure ever since, and have expanded into the Canton Network as
-          institutional finance moves on-chain.
-        </p>
-        <p>
-          We do not resell someone else's nodes. We do not run roadmaps written for
-          investors. We operate machines that have to be right every slot, every round,
-          every day, and we are accountable for them.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────────────────── CONTACT ───────────────────────── -->
-  <section class="section contact" id="contact">
-    <div class="wrap contact-inner">
+  <!-- CONTACT -->
+  <section class="cta" id="contact">
+    <div class="wrap cta-inner">
       <div>
-        <p class="eyebrow">Contact</p>
-        <h2>Talk to the team that runs the nodes.</h2>
-        <p class="sub">For validator programs, foundations and institutions evaluating operators.</p>
+        <h2>We run the nodes.<br>You build.</h2>
+        <p>Talk to the engineers who operate the infrastructure.</p>
       </div>
-      <div class="contact-actions">
-        <a class="btn btn-primary" href="mailto:abhi@alaino.xyz">abhi@alaino.xyz</a>
-      </div>
+      <a class="btn btn-lg" href="mailto:abhi@alaino.xyz">abhi@alaino.xyz</a>
     </div>
+    <div class="cta-stripes" aria-hidden="true"></div>
   </section>
 
 </main>
 
 <footer class="footer">
   <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <img src="logo.svg" alt="" width="22" height="22">
-      <span>ALAINO</span>
-    </div>
+    <a class="brand" href="#top" aria-label="Alaino home">
+      <svg class="brand-mark" viewBox="454 474 292 253" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M454.766 474.63H503.177C503.177 474.63 503.581 590.817 619.365 590.817C522.543 590.817 522.542 474.63 522.542 474.63H570.954C570.954 474.63 561.271 581.135 638.73 581.135C579.906 581.135 590.318 474.63 590.318 474.63L638.73 474.63C638.73 474.63 600.001 590.817 696.824 590.818H745.236V610.182H696.824C600.001 610.182 638.73 726.37 638.73 726.37H590.318C590.318 726.37 579.905 619.865 638.73 619.864C561.271 619.865 570.955 726.37 570.955 726.37H522.543C522.543 726.37 522.542 610.182 619.365 610.182C503.581 610.182 503.178 726.37 503.178 726.37H454.766C454.766 726.37 454.766 600.5 590.318 600.5C454.766 600.5 454.766 474.63 454.766 474.63Z" fill="currentColor"/></svg>
+      <span class="brand-name">alaino</span>
+    </a>
     <div class="footer-legal">
       <p>© 2026 Catalysis International Ltd. All rights reserved.</p>
-      <p>Registered office: Intershore Chambers, P.O. Box 4342, Road Town, Tortola, British Virgin Islands VG1110</p>
+      <p>Intershore Chambers, P.O. Box 4342, Road Town, Tortola, British Virgin Islands VG1110</p>
     </div>
   </div>
 </footer>
 
-<script src="script.js?v=1"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>
